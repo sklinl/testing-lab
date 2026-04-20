@@ -23,5 +23,5 @@
 			]
 		}
 	},
-	"postCreateCommand": "docker run -d --name mongodb -p 27017:27017 mongo:latest && cd backend && npm install && cd ../frontend && npm install && npx playwright install-deps && npx playwright install chromium"
+	"postCreateCommand": "docker run -d --name mongodb -p 27017:27017 mongo:latest && cd backend && cp .env.sample .env && npm install && cd ../frontend && npm install && npx playwright install-deps && npx playwright install chromium"
 }
