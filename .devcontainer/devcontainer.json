@@ -1,37 +1,30 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
-	"name": "Node.js & TypeScript",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"name": "Node.js & TypeScript Testing Lab",
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/desktop-lite:1": {},
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/microsoft/playwright:1": {
+			"installBrowsers": true
+		},
+		"ghcr.io/devcontainers-contrib/features/k6:1": {}
 	},
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		6080,
-		5901
+		5901,
+		5173, // Frontend
+		8888  // Backend
 	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"streetsidesoftware.code-spell-checker",
 				"EditorConfig.EditorConfig",
-				"dbaeumer.vscode-eslint"
+				"dbaeumer.vscode-eslint",
+				"vitest.explorer",
+				"ms-playwright.playwright" 
 			]
 		}
 	},
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"postCreateCommand": "npm install -g k6 && cd backend && npm install && cd ../frontend && npm install && npx playwright install chromium"
 }
