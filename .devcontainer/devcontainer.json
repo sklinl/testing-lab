@@ -4,9 +4,6 @@
 	"features": {
 		"ghcr.io/devcontainers/features/desktop-lite:1": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-		"ghcr.io/microsoft/playwright:1": {
-			"installBrowsers": true
-		},
 		"ghcr.io/devcontainers-contrib/features/k6:1": {}
 	},
 	"forwardPorts": [
@@ -26,5 +23,5 @@
 			]
 		}
 	},
-	"postCreateCommand": "npm install -g k6 && cd backend && npm install && cd ../frontend && npm install && npx playwright install chromium"
+	"postCreateCommand": "cd backend && npm install && cd ../frontend && npm install && npx playwright install-deps && npx playwright install chromium"
 }
